@@ -27,8 +27,11 @@ npm run dev
 // Creating component instances
 document.querySelectorAll('.panorama').forEach(panoramaEl => {
     if (panoramaEl instanceof HTMLElement) {
-        const instance = createPanoramaInstance();           
-        const cleanup = instance.mount(panoramaEl, { background: getRandomColor() });
+        const instance = createPanoramaInstance();
+        
+        instance.api.setBackground(getRandomColor());
+
+        const cleanup = instance.mount(panoramaEl);
         instances.set(panoramaEl, cleanup);
     }
 });

@@ -7,23 +7,17 @@ export const PanoramaViewer = () => {
 
     const { store, api } = useContext(PanoramaContext)!;
     
-    const background = store((s) => s.background);
+    const background = store(s => s.background);
 
     useEffect(() => {
-        if (!containerRef.current) {
+        console.log(background);
+    }, [background]);
+
+    useEffect(() => {
+        if (!controlsRef.current) {
             return;
         }
 
-        // const v = new Viewer(containerRef.current, { tourStoreUrl });
-        // store.getState().viewer.set(v);
-        // api.emit('viewer.ready', { viewer: v, tourId });
-
-        return () => {
-            //store.getState().viewer.reset();
-        }
-    }, []);
-
-    useEffect(() => {
         store.getState().setControlsContainer(controlsRef.current);
     }, []);
 

@@ -31,8 +31,10 @@ window.addEventListener('load', async () => {
     document.querySelectorAll('.panorama').forEach(panoramaEl => {
         if (panoramaEl instanceof HTMLElement) {
             const instance = createPanoramaInstance();
-           
-            const cleanup = instance.mount(panoramaEl, { background: getRandomColor() });
+            
+            instance.api.setBackground(getRandomColor());
+
+            const cleanup = instance.mount(panoramaEl);
             instances.set(panoramaEl, cleanup);
         }
     });
