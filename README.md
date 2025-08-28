@@ -60,4 +60,4 @@ This pattern is particularly useful for applications requiring:
 
 ## License
 
-MIT License - feel free to use this pattern in your projects!
+[MIT](LICENSE)
