@@ -9,13 +9,11 @@ export const createPanoramaInstance = () => {
     const store = createPanoramaStore();
     const api = createPanoramaApi(store);
 
-    const renderContent = () => (
+    const PanoramaComponent = React.memo(() => (
         <PanoramaContext.Provider value={{ store, api }}>
             <PanoramaViewer />
         </PanoramaContext.Provider>
-    )
-
-    const PanoramaComponent = React.memo(renderContent);
+    ));
 
     return {
         api,
@@ -25,13 +23,13 @@ export const createPanoramaInstance = () => {
             const root = ReactDOM.createRoot(container);
             root.render(
                 <React.StrictMode>
-                    {renderContent()}
+                    <PanoramaComponent />
                 </React.StrictMode>
             )
 
             return { 
                 unmount: () => root.unmount(), 
-                api: this.api 
+                api
             }
         }
     }
