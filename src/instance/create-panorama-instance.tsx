@@ -14,9 +14,6 @@ export const createPanoramaInstance = () => {
 
     return {
         get api() {
-            if (!api) {
-                throw new Error('Instance not initialized. Call init() first.');
-            }
             return api;
         },
 
