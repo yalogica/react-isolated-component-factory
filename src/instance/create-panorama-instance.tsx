@@ -6,32 +6,26 @@ import { PanoramaContext } from '@/instance/panorama-context';
 import { PanoramaViewer } from '@/components/panorama-viewer';
 
 export const createPanoramaInstance = () => {
-    let store: ReturnType<typeof createPanoramaStore>;
-    let api: ReturnType<typeof createPanoramaApi>;
+    const store = createPanoramaStore();
+    const api = createPanoramaApi(store);
 
-    store = createPanoramaStore();
-    api = createPanoramaApi(store);
+    const renderContent = () => (
+        <PanoramaContext.Provider value={{ store, api }}>
+            <PanoramaViewer />
+        </PanoramaContext.Provider>
+    );
+
+    const PanoramaComponent = React.memo(renderContent);
 
     return {
-        get api() {
-            return api;
-        },
-
-        get PanoramaViewer() {
-            return () => (
-                <PanoramaContext.Provider value={{ store, api }}>
-                    <PanoramaViewer />
-                </PanoramaContext.Provider>
-            )
-        },
+        api,
+        PanoramaViewer: PanoramaComponent,
 
         mount(container: HTMLElement) {
             const root = ReactDOM.createRoot(container);
             root.render(
                 <React.StrictMode>
-                    <PanoramaContext.Provider value={{ store, api }}>
-                        <PanoramaViewer />
-                    </PanoramaContext.Provider>
+                    {renderContent()}
                 </React.StrictMode>
             )
 
