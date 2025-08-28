@@ -13,7 +13,7 @@ export const createPanoramaInstance = () => {
         <PanoramaContext.Provider value={{ store, api }}>
             <PanoramaViewer />
         </PanoramaContext.Provider>
-    );
+    )
 
     const PanoramaComponent = React.memo(renderContent);
 
